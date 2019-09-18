@@ -8,3 +8,26 @@ docker run -d -p 1025:1025 -p 8085:8025 mailhog/mailhog
 
 *.Apache Mesos: is a orchestration engine for container.
 *.Marathon is a framework for docker runtime images.
+*.Autoscaling and fault tolerance inbuilt in kubernetes
+*.Key Concepts:
+  - Namespace: Partitationing different projects 
+  - Pods: isolated process/PID namespace
+          root filesystem namespace
+          user namespace
+          network namespace
+          hostname/uts namespace
+          volumes
+*. Kubenetes Follows SPECS
+       A pi version
+       K ind (entity)
+       M etadata (Label)
+       S pec (similar to docker compose)
+*. Replication Controllers:
+      Control loop to monitoring ( it works through Labelling )
+      Replication Controllers (works for A and B and C) v/s replicaSet ( works for A or B or C) 
+      replicaset + update stratergies = Deployment
+*. Service Discovery:
+      Services works on SPEC with labels and selectors
+      connects to end points with selectors.
+      Service has constant identifier is CLUSTER IP (it never changes)
+      
