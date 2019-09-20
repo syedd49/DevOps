@@ -22,7 +22,8 @@ docker run -d -p 1025:1025 -p 8085:8025 mailhog/mailhog
        K ind (entity)
        M etadata (Label)
        S pec (similar to docker compose)
-*. Replication Controllers:
+*. Replication Controllers: 2types
+      Labelling and Selection helps to deployment fail pods to available pods. 
       Control loop to monitoring ( it works through Labelling )
       Replication Controllers (works for A and B and C) v/s replicaSet ( works for A or B or C) 
       replicaset + update stratergies = Deployment
@@ -30,4 +31,91 @@ docker run -d -p 1025:1025 -p 8085:8025 mailhog/mailhog
       Services works on SPEC with labels and selectors
       connects to end points with selectors.
       Service has constant identifier is CLUSTER IP (it never changes)
+      docker runs on Port 32768.
+*. Apply primitive in application Slack
+      Namespaces
+      services - L4 networking and Loadbalancer and discoveries
+      deployment
+*. ConfigMaps and Secrets
+   - persistent volumes (mounting dynamically or statically)
+   - Network and CNI 
+         Network Policies : apply firewalls
+   - HELM Package Manager:- packaging ur application to create stack      
+   - RBAC 1.6version, gives authentication and authorization
+   - Horizontal Pod Autoscalar 
+   - HEAPSTER :- Monitoring in Kubernetes
+*. Additional Controllers:
+         Deployments
+         Daemon Set allow u to run particular monitoring server in every single node its same like global set in Swarm
+         Stateful States its depends on services bcoz it does not come with end points.
+         CRON
+         JOBS
+*. Architecture of Kubernetes:
+         Master Node: Scheduler,API Server, Controllers Manager, etcd (it has all information about cluster and master).
+         Worker Node: Docker(Runtime Engine),kubelet,kubeproxy
+*. External services:
+        Storage : NFS or block storage etc
+        Log mgmt: Splunk etc
+        Monitoring : promothieus,griffana etc
+        
+*. DOCKERS: play-with-docker.com
+      Docker system info
+      docker help
+      default runtime in docker is runc
+      Commands:
+        docker container run alpine:3.6 uptime
+        docker system events
+        docker container run apline ps
+        docker ps -l
+        docker ps -a
+        docker ps -n 2 (Last two container)
+        docker container -it alpine sh
+        ps aux
+        ps -ef
+        docker container -idt alpine sh
+*. OPERATIONS in Dockers:
+        docker rename oldname newname
+        docker logs a78 or containerID -f
+        docker exec a78 ps
+        docker exec -it a78 sh (run anything within the container)
+        docker inspect (detailed info about the container)
+        docker cp (to copy)
+        docker container cp filename tofile/path
+        docker stop or docker stop containerID
+        docker rm container
+        docker rm -f container(to remove forcefully)
+  *. docker container run -idt -P nginx (-P is for porting to access from out side)
+       docker container run -idt -p 8888:80 nginx (-p is manaully porting)
+       docker run -idt --name ghost -p 3001:2368 ghost:alpine (running appication)
+    Commands;
+         docker images
+         docker images history imageID
+         docker pull ubuntu
+         docker pull centos
+         docker container run -idt --name dev-ubuntu --net host ubuntu bash 
+                    (--net host networking run this image any port)
+         docker container run -idt --name dev-centos --net host centos bash 
+         to go inside the container 
+          docker exec -it dev-ubuntu bash
+            ps aux
+         docker stop dev-ubuntu
+         then docker start dev-ubuntu
+        -- launch UI portainer.io
+        -- github.com/schoolofdevops
+      
+           
+         
+            
+            
+            
+         
+                   
+    
+       
+   
+        
+        
+        
+    
+         
       
