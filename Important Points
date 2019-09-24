@@ -134,6 +134,86 @@ Cluster Maintenance 11%
 Logging / Monitoring 5%
 Storage 7%
 Troubleshooting 10%
+
+PODS:
+
+writing a pod, 
+
+A-K-M-S
+
+Sample creatinf of Pod yaml Script
+
+ApiVersion: v1
+Kind: Pod
+Metadata: 
+  name: vote
+  labels: (this is identifier for metadata)
+    app: python
+    role: vote
+    version: v1
+Spec:
+  containers:
+    - name: app
+      image: imagename/tag
+      ports:
+        - containerPort: 80
+          protocol: TCP
+Launch Pod using kubectl:
+    kubectl apply --help
+    kubectl apply -f vote-pod.yaml
+    kubectl get pods -n kube-system
+    kubectl get pods -o wide
+    kubectl describe pods
+    kubectl logs -f vote  (to get logs of a particular pod)
+    kubectl exec -it vote sh (Execute shell)
+    kubectl port-forward vote(app) 8000:80 (8000 is internal port and 80 is actual pod)
+    kubectl edit pod vote (you can edit live pod which will bring effect as soon as apply changes)
+    kubectl get pods vote -o yaml (to tracks the issues of pods) troubleshoot
+    
+ ***** Spec Schema: https://kubernetes.io/docs/user-guide/pods/multi-container/ *****
+ 
+ Attaching Volumes to pods:
+       hostPath (for localhost)
+       emptyDir (for localhost)
+       
+   adding volumes to db spec file:
+         volumeMounts:
+           - name: pg-data
+             mountPath: /var/lib/posgresql/data
+     volumes: (this is attached to container not to pods because if pods get terminates but volumes still exists)
+       - name: pg-data
+         hostPath: 
+            path: /var/lib/postgres
+            type: DirectoryOrCreate
+            
+            save 
+ 
+ kubectl apply -f db-pod.yaml --dry-run (dry run is a test run)
+ kubectl apply -f db-pod.yaml
+ kubectl exec -it db bash
+
+
+Launching multi container pods:
+        
+      
+      
+      
+      
+      
+    
+  
+          
+          
+          
+            
+        
+        
+ 
+    
+    
+    
+          
+          
      
      
          
