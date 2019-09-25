@@ -194,7 +194,18 @@ Launch Pod using kubectl:
 
 
 Launching multi container pods:
-        
+        to connect to individual container:
+         *. kubectl exec it web sh
+            ps aux
+         kubectl exec -it web sh -c sync (sync is individual container)
+           they share same network from pods.- web
+          to check the logs of individaul container:
+            kubectl logs web -c nginx
+            kubectl logs web -c sync
+               
+            
+          
+          
       
       
       
