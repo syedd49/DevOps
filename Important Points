@@ -203,8 +203,20 @@ Launching multi container pods:
             kubectl logs web -c nginx
             kubectl logs web -c sync
                
-            
-          
+  ***** Replication Controller / Replica Sets ******** (monitoring/fault tolerance)          
+          to achieve high availablity
+     
+     - set up namespace:
+     - kubectl config view
+ #to switch the namespace from default namespace: (Context is for connect to diffrnt clusters)
+     - kubectl config set-context $(kubectl config current-context) --namespace=your_namespace
+     or 
+     - kubectl set-context $(kubectl config current-context) --namespace
+     or 
+     - kubectl config current-context )it will switch the namespace
+     
+     
+     
           
       
       
