@@ -242,8 +242,11 @@ Launching multi container pods:
                 ports:
                   - containerPort: 80
                     protocol: TCP
-            
-          
+      *** Launch Replica Set and Fault tolerance:
+            run replica set file
+              kubectl apply -f replicafile.yaml
+              kubectl get pods --show-labels
+              
       
       
       
