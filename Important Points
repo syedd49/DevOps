@@ -215,8 +215,34 @@ Launching multi container pods:
      or 
      - kubectl config current-context )it will switch the namespace
      
-     
-     
+ Writing Replica spec:
+       ApiVersion: apps/v1
+       Kind: replicaSet
+       Metadata:
+         name: vote(pod_name)
+       Spec:
+         replicas: 5
+         minReadySeconds:10
+         selectors:  (to types of selctors: set-based and equality-based)
+           matchLabels:
+             role: vote
+           matchExpressions
+             - {key: version, operator: In, Values: [v1,v2,v3]
+         template:
+           metadata:
+             name: vote
+             labels:
+               app: python
+               role: vote
+               version: v1
+          spec:
+            containers:
+              - name: app
+                image: Imagename/tag
+                ports:
+                  - containerPort: 80
+                    protocol: TCP
+            
           
       
       
