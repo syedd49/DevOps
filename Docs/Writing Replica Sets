@@ -1,0 +1,65 @@
+Writing ReplicaSet Specs
+
+
+To understand how ReplicaSets works with the selectors lets launch a pod in the new namespace with existing specs.
+
+cd k8s-code/pods
+kubectl apply -f vote-pod.yaml
+ 
+kubectl get pods
+cd ../projects/instavote/dev/
+Lets now write the spec for the Rplica Set. This is going to mainly contain,
+
+replicas
+
+selector
+
+template (pod spec )
+
+minReadySeconds
+
+file: vote-rs.yaml
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: vote
+spec:
+  replicas: 5
+  minReadySeconds: 20
+  selector:
+    matchLabels:
+      role: vote
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+Lets now add the metadata and spec from pod spec defined in vote-pod.yaml. And with that, the Replica Set Spec changes to
+
+file: vote-rs.yaml
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: vote
+spec:
+  replicas: 5
+  minReadySeconds: 20
+  selector:
+    matchLabels:
+      role: vote
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+    metadata:
+      name: vote
+      labels:
+        app: python
+        role: vote
+        version: v1
+    spec:
+      containers:
+        - name: app
+          image: schoolofdevops/vote:v1
+          ports:
+            - containerPort: 80
+              protocol: TCP
