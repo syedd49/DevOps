@@ -2,7 +2,7 @@ pipeline{
     agent any
     
     environment{
-        PATH = "/opt/maven/bin:$PATH"
+        PATH = "/opt/maven/apache-maven-3.6.2/bin:$PATH"
     }
     stages{
         stage("Git Checkout"){
@@ -10,10 +10,11 @@ pipeline{
                 git 'https://github.com/syedd49/MyRepo.git'
             }
         }
-        stage("Build package"){
+         stage("Build package"){
             steps{
                 sh "mvn clean package"
-                sh "mv /target/*.war target/webapp.war"                              
+                 sh "mv /target/*.war /webapps/webapp.war"
+                //sh "mv /var/lib/jenkins/workspace/simplepipeline/webapp/target/*.war target/webapp.war"
             }
         }
         stage("Deploy on Tomcat_server"){
@@ -23,7 +24,7 @@ pipeline{
                   scp -o StrictHostKeyChecking=no target/webapp.war ec2-user@172.31.40.53:/opt/apache-tomcat-8.5.46/webapps/
                   ssh ec2-user@172.31.40.53 /opt/apache-tomcat-8.5.46/bin/shutdown.sh
                   ssh ec2-user@172.31.40.53 /opt/apache-tomcat-8.5.46/bin/startup.sh
-                """"
+                """
                }
             }
         }
