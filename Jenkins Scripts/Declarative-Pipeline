@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    
+    environment{
+        PATH = "/opt/maven/bin:$PATH"
+    }
+    stages{
+        stage("Git Checkout"){
+            steps{
+                git 'https://github.com/syedd49/MyRepo.git'
+            }
+        }
+        stage("Build package"){
+            steps{
+                sh "mvn clean package"
+                
+            }
+        }
+        stage("Deploy on Tomcat_server"){
+            steps{
+                sshagent(['Tomcat-8']) {
+                scp -o StrictHostKeyChecking=no
+               }
+            }
+        }
+    }
+}
